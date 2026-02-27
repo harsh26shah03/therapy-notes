@@ -8,7 +8,7 @@ const HomePage = () => {
       formatter={(str) => str.toUpperCase()}
       onChange={(val) => {
         if (val === '123456') {
-          window.location.href = '/notes'
+          window.location.href = '/sessions'
         }
       }}
       size='large'

@@ -61,7 +61,7 @@ const NotesTable = ({ total, notes }: { total: number; notes: NoteType[] }) => {
           current: Number(page_number),
           showTotal: (total) => `${total} Notes`,
           onChange(page, pageSize) {
-            router.push(`/notes?page_number=${page}&page_size=${pageSize}`)
+            router.push(`/sessions?page_number=${page}&page_size=${pageSize}`)
           },
           showSizeChanger: true,
           placement: ['topEnd']
