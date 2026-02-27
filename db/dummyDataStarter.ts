@@ -18,8 +18,16 @@ export const States = {
 // -----------------------------
 // DB Setup
 // -----------------------------
-const dbPath = path.join(process.cwd(), 'public', 'notes.db');
-const db = new Database(dbPath);
+import fs from 'fs';
+
+const PUBLIC_DB_PATH = path.join(process.cwd(), 'public', 'notes.db')
+const TMP_DB_PATH = path.join('/tmp', 'notes.db')
+
+if (!fs.existsSync(TMP_DB_PATH)) {
+  fs.copyFileSync(PUBLIC_DB_PATH, TMP_DB_PATH);
+}
+
+const db = new Database(TMP_DB_PATH);
 
 // Enable foreign keys
 db.pragma('foreign_keys = ON');
