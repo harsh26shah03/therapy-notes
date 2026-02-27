@@ -9,7 +9,7 @@ export const Events = {
 type EventType = keyof typeof Events
 
 export async function logEvent(note_id: string, event_type: EventType, data: unknown = {}) {
-  await fetchWithRetry(`http://localhost:3000/api/logs/${note_id}`, {
+  await fetchWithRetry(`${process.env.NEXT_PUBLIC_BASE_URL}api/logs/${note_id}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

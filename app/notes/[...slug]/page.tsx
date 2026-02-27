@@ -5,19 +5,19 @@ import { EventsResponse, NoteResponse, VersionResponse } from '@/types/notes';
 const NoteDetailsPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = await params
 
-  const noteResponse = await fetchWithRetry(`http://localhost:3000/api/note/${slug[0]}`)
+  const noteResponse = await fetchWithRetry(`${process.env.NEXT_PUBLIC_BASE_URL}/api/note/${slug[0]}`)
 
   const noteJson: NoteResponse = await noteResponse.json()
 
   const { note } = noteJson
 
-  const contentResponse = await fetchWithRetry(`http://localhost:3000/api/version/${slug[0]}`)
+  const contentResponse = await fetchWithRetry(`${process.env.NEXT_PUBLIC_BASE_URL}/api/version/${slug[0]}`)
 
   const versionJson: VersionResponse = await contentResponse.json()
 
   const { version } = versionJson
 
-  const eventsResponse = await fetchWithRetry(`http://localhost:3000/api/logs/${slug[0]}`)
+  const eventsResponse = await fetchWithRetry(`${process.env.NEXT_PUBLIC_BASE_URL}/api/logs/${slug[0]}`)
 
   const eventsJson: EventsResponse = await eventsResponse.json()
 

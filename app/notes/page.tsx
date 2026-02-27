@@ -10,7 +10,7 @@ const Home = async ({ searchParams }: { searchParams: Promise<{ [key: string]: s
     page_size: page_size.toString()
   })
 
-  const notesResponse = await fetchWithRetry(`http://localhost:3000/api/notes?${params.toString()}`)
+  const notesResponse = await fetchWithRetry(`${process.env.NEXT_PUBLIC_BASE_URL}/api/notes?${params.toString()}`)
 
   const notesJson: NotesResponse = await notesResponse.json()
 
