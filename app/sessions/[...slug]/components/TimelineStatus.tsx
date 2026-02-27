@@ -129,7 +129,7 @@ const statusActivity = (data: unknown): TimelineItemType => {
             }}
           />
         ),
-        content: 'Status was changed to Generating'
+        content: 'Status was changed to Ready for review'
       }
     case NoteStatusType.REJECTED:
       return {
