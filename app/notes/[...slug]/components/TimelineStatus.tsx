@@ -11,7 +11,7 @@ const TimelineStatus = ({ events }: { events: EventType[] }) => {
   const storedEvents = JSON.parse(localStorage.getItem('note_event_logs') || '[]') as EventType[]
   return (
     <Timeline
-      items={[...storedEvents, ...events].map((e) => configGenerator(typeof e.data === 'object' ? e.data : JSON.parse(e.data))[e.event_type])}
+      items={[...storedEvents, ...events].map((e) => configGenerator(typeof e.data === 'object' ? e.data : JSON.parse(e.data as unknown as string))[e.event_type])}
     />
   )
 }
@@ -19,6 +19,7 @@ const TimelineStatus = ({ events }: { events: EventType[] }) => {
 export default TimelineStatus
 
 const noteOpenActivity = (data: unknown): TimelineItemType => {
+  const typedData = data as { created_at: string }
   return {
     icon: (
       <FolderOpenOutlined
@@ -27,11 +28,12 @@ const noteOpenActivity = (data: unknown): TimelineItemType => {
         }}
       />
     ),
-    content: `The note was opened at ${dayjs(data?.created_at).format('D MMM, YYYY HH:MM')}`
+    content: `The note was opened at ${dayjs(typedData.created_at).format('D MMM, YYYY HH:MM')}`
   }
 }
 
 const noteSaveActivity = (data: unknown): TimelineItemType => {
+  const typedData = data as { created_at: string; content: string }
   return {
     icon: (
       <SaveOutlined
@@ -42,16 +44,16 @@ const noteSaveActivity = (data: unknown): TimelineItemType => {
     ),
     content: (
       <Space>
-        {`The note was saved at ${dayjs(data?.created_at).format('D MMM, YYYY HH:MM')}`}
+        {`The note was saved at ${dayjs(typedData.created_at).format('D MMM, YYYY HH:MM')}`}
         <Button
           type="link"
           onClick={() => {
             Modal.info({
-              title: `Version saved at ${dayjs(data?.created_at).format('D MMM, YYYY HH:MM')}`,
+              title: `Version saved at ${dayjs(typedData.created_at).format('D MMM, YYYY HH:MM')}`,
               content: (
                 <ReactQuill
                   theme="snow"
-                  value={data?.content || ''}
+                  value={typedData.content || ''}
                   style={{
                     height: '60vh',
                     paddingBottom: '4rem'
@@ -71,7 +73,8 @@ const noteSaveActivity = (data: unknown): TimelineItemType => {
 }
 
 const statusActivity = (data: unknown): TimelineItemType => {
-  switch (data?.status) {
+  const typedData = data as { status: string }
+  switch (typedData.status) {
     case NoteStatusType.APPROVED:
       return {
         icon: (
