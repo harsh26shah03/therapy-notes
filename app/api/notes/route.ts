@@ -3,7 +3,7 @@ import path from 'path';
 import Database from 'better-sqlite3';
 import { NotesResponse } from '@/types/notes';
 
-const dbPath = path.join(process.cwd(), 'db', 'notes.db');
+const dbPath = path.join(process.cwd(), 'public', 'notes.db');
 const db = new Database(dbPath);
 
 export async function GET(request:NextRequest): Promise<NextResponse<NotesResponse>> {

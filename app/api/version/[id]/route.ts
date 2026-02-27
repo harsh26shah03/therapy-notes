@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 
 
-const dbPath = path.join(process.cwd(), 'db', 'notes.db');
+const dbPath = path.join(process.cwd(), 'public', 'notes.db');
 const db = new Database(dbPath);
 
 export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {

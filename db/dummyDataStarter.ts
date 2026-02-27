@@ -18,7 +18,7 @@ export const States = {
 // -----------------------------
 // DB Setup
 // -----------------------------
-const dbPath = path.join(process.cwd(), 'db', 'notes.db');
+const dbPath = path.join(process.cwd(), 'public', 'notes.db');
 const db = new Database(dbPath);
 
 // Enable foreign keys
