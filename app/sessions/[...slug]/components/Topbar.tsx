@@ -1,5 +1,5 @@
 'use client';;
-import Status from '@/app/notes/components/Status'
+import Status from '@/app/sessions/components/Status'
 import { getAllowedOps } from '@/lib/stateMachine'
 import { NoteStatusType, NoteType } from '@/types/notes'
 import { Flex, Tag, Typography } from 'antd';

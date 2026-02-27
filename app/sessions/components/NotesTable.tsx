@@ -70,7 +70,7 @@ const NotesTable = ({ total, notes }: { total: number; notes: NoteType[] }) => {
         onRow={(record) => {
           return {
             onClick: async () => {
-              router.push(`/notes/${record.id}`)
+              router.push(`/sessions/${record.id}`)
               await logEvent(record.id, LogType.NOTE_OPENED, {})
             }
           }
